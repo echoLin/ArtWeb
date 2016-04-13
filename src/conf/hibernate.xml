@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 配置数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:8889/art?characterEncoding=utf-8"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	
+	<!--配置SessionFactory  -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource"><ref bean="dataSource" /></property>
+		<property name="hibernateProperties">
+			<props>
+				<!-- 设置数据库方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- 设置自动创建|更新|验证数据库表结构 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<!-- 是否在控制台显示sql -->
+				<prop key="hibernate.show_sql">false</prop>
+				<!-- 是否格式化sql 优化显示-->
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- 是否开启二级缓存 -->
+                <prop key="hibernate.cache.use_second_level_cache">false</prop>
+                <!-- 是否开启查询缓存 -->
+                <prop key="hibernate.cache.use_query_cache">false</prop>
+                <!-- 数据库批量查询最大数 -->
+                <prop key="hibernate.jdbc.fetch_size">50</prop>
+                <!-- 数据库批量更新、添加、删除操作最大数 -->
+                <prop key="hibernate.jdbc.batch_size">50</prop>
+                <!-- 是否自动提交事务 -->
+                <prop key="hibernate.connection.autocommit">true</prop>
+                <!-- 指定hibernate在何时释放JDBC连接 -->
+                <prop key="hibernate.connection.release_mode">auto</prop>
+                <!-- 创建session方式 hibernate4.x 的方式 -->
+                <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
+                <prop key="javax.persistence.validation.mode=nonehibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
+                <!-- javax.persistence.validation.mode默认情况下是auto的，就是说如果不设置的话它是会自动去你的classpath下面找一个bean-validation**包 
+                    所以把它设置为none即可 -->
+                <prop key="javax.persistence.validation.mode">none</prop>
+			</props>
+		</property>
+		
+		<!-- 自动扫描实体对象 tdxy.bean的包结构中存放实体类 
+		<property name="packagesToScan" value="xmu.edu.cn.Entity"/>
+		-->
+		<!--  --> 
+		<property name="annotatedClasses">
+			<list>
+				<value>xmu.edu.cn.Entity.*</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 配置一个事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	
+	<!-- 配置事务，使用代理的方式 -->
+	<bean id="transactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">  
+	    <property name="transactionManager" ref="transactionManager"></property>  
+	    <property name="transactionAttributes">  
+	        <props>
+	        	<prop key="save*">PROPAGATION_REQUIRED,-Exception</prop>
+	        	<prop key="create*">PROPAGATION_REQUIRED,-Exception</prop>
+	        	<prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
+	        	<prop key="set*">PROPAGATION_REQUIRED,-Exception</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-Exception</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+	    </property>  
+	</bean> 
+	
+</beans>
