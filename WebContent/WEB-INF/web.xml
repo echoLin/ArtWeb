@@ -13,7 +13,7 @@
 
   <display-name>art</display-name>
   <welcome-file-list>
-    <welcome-file>/mall/index</welcome-file>
+    <welcome-file>/test</welcome-file>
   </welcome-file-list>
   
   <!-- 配置Spring监听 -->
