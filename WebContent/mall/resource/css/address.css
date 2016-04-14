@@ -1,0 +1,95 @@
+body{
+	background-color: #f5f5f5;
+}
+
+.address_list {
+	border-style: solid;
+	border-color: #CED1D4;
+	border-width: 1px;
+	border-radius: 5px;
+    margin: 5%;
+	background-color: white;
+	height: 130px;
+	width: 90%;
+}
+
+.address_list .first_row_left{
+	float:left;
+}
+
+.address_list .first_row_right{
+	float:right;
+}
+
+.first_row{
+	height: 20px;
+	padding: 3%;
+}
+
+.second_row{
+	height: 40px;
+	border-style: solid none;
+	border-width: 1px;
+	border-color: #CED1D4;
+	font-size: 12px;
+	color: #b2b2b2;
+    padding-left: 3%;
+    padding-top: 3%;
+}
+
+.third_row{
+	height: 20px;
+    padding-left: 10%;
+    padding-top: 2%;
+	
+}
+
+.default{
+    float: left;
+    width: 33%;
+    display: inline;
+}
+
+.default_img{
+	
+}
+.edit{
+    float: left;
+    width: 33%;
+    display: inline;
+}
+
+.img{
+    width: 20%;
+}
+
+.delete{
+    float: right;
+    width: 33%;
+    display: inline;
+}
+
+span{
+	position: fixed;
+}
+
+a:link{
+	text-decoration:none ; 
+	color:white ;
+}
+
+a:visited {
+	text-decoration:none ; 
+	color:white;
+}
+
+a:hover {
+	text-decoration:none ; 
+	color:white;}
+	
+a:active {
+	text-decoration:none ; 
+	color£ºwhite;
+} 
+
+

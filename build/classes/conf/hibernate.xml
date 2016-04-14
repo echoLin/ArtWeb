@@ -17,7 +17,7 @@
 		<property name="password" value="root"></property>
 	</bean>
 	
-	<!--配置SessionFactory  -->
+	<!-- 配置SessionFactory --> 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource"><ref bean="dataSource" /></property>
 		<property name="hibernateProperties">
@@ -27,9 +27,10 @@
 				<!-- 设置自动创建|更新|验证数据库表结构 -->
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<!-- 是否在控制台显示sql -->
-				<prop key="hibernate.show_sql">false</prop>
-				<!-- 是否格式化sql 优化显示-->
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- 是否格式化sql 优化显示 -->
 				<prop key="hibernate.format_sql">true</prop>
+				
 				<!-- 是否开启二级缓存 -->
                 <prop key="hibernate.cache.use_second_level_cache">false</prop>
                 <!-- 是否开启查询缓存 -->
@@ -51,15 +52,15 @@
 			</props>
 		</property>
 		
-		<!-- 自动扫描实体对象 tdxy.bean的包结构中存放实体类  -->
+		<!-- 自动扫描实体对象 tdxy.bean的包结构中存放实体类 --> 
 		<property name="packagesToScan" value="xmu.edu.cn.Entity"/>
-		<!-- 
-		<property name="annotatedClasses">
+		
+		<!-- <property name="annotatedClasses">
 			<list>
 				<value>xmu.edu.cn.Entity.*</value>
 			</list>
-		</property>
-		 --> 
+		</property> -->
+		 
 	</bean>
 	
 	<!-- 配置一个事务管理器 -->
@@ -67,7 +68,8 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	<!-- 开启@Transaction -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<!-- 配置事务，使用代理的方式 -->
 	<!-- <bean id="transactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">  
@@ -87,15 +89,16 @@
 	<!-- 配置事务的通知 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="*" propagation="REQUIRED"/>
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
 		</tx:attributes>
 	</tx:advice>
 	
-	<!-- 配置切面 -->
-	<aop:config>
-	     <!-- 配置切入点 -->
+	<!-- <aop:config>
+	     配置切入点
 	     <aop:pointcut expression="execution(* xmu.edu.cn.Service.PersonalServiceImpl+.*(..))" id="pointcut1"/>
-	     <!-- 配置切面 -->
+	     配置切面
 	     <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut1"/>
-     </aop:config>
+     </aop:config> -->
+     
 </beans>

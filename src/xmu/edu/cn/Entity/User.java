@@ -1,6 +1,8 @@
 package xmu.edu.cn.Entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,24 +19,38 @@ import org.hibernate.annotations.NamedQuery;
 @Entity
 @Table(name="User")
 @NamedQueries({
+	@NamedQuery(name="User.getByUserId",query="from User u where u.userId = :userId"),
+	@NamedQuery(name="User.getByTelephoneAndPassword", query="from User u where u.telephone = :telephone and u.password = :password")
 	})
 public class User {
 	@Id
 	@GeneratedValue
 	protected long userId;
-	@Column(unique=true,nullable=false)
 	protected String username;//用户名
 	protected String password;//密码
 	@Column(unique=true)
 	protected String telephone;//手机号
-	protected Date register_time;//注册时间
-	protected String avatar="/Art/images/avatar/default_avatar_male.jpg";//头像
+	protected Date registerTime;//注册时间
+	protected String avatar="/Art/images/avatar/person.png";//头像
 	@Column(precision=10,scale=2)
 	protected Double money = 0.0;//账户余额
-	protected Integer version;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="artistId",unique=true)
-	protected Artist artist;
+	protected Artist artist = null;
+	public static boolean checkUser(User user){
+		//检查user各个属性是否合法
+		if(user.username == null || user.telephone == null || user.password == null)
+			return false;
+		if(!Pattern.matches("^[a-zA-Z0-9]{4,17}$", user.username)){
+			System.out.println("username");
+			return false;
+		}
+		if(!Pattern.matches("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$", user.telephone))
+			return false;
+		if(!Pattern.matches("^[a-zA-Z0-9]{6,16}$", user.password))
+			return false;
+		return true;
+	}
 	public long getUserId() {
 		return userId;
 	}
@@ -59,12 +75,6 @@ public class User {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public Date getRegister_time() {
-		return register_time;
-	}
-	public void setRegister_time(Date register_time) {
-		this.register_time = register_time;
-	}
 	public String getAvatar() {
 		return avatar;
 	}
@@ -77,16 +87,18 @@ public class User {
 	public void setMoney(Double money) {
 		this.money = money;
 	}
-	public Integer getVersion() {
-		return version;
-	}
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 	public Artist getArtist() {
 		return artist;
 	}
 	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
+	public String getRegisterTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(registerTime);
+	}
+	public void setRegisterTime(Date registerTime) {
+		this.registerTime = registerTime;
+	}
+	
 }

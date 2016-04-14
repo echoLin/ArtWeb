@@ -1,0 +1,30 @@
+.my_money{
+	
+	width: 100%;
+    font-size: 30px;
+    color: coral;
+    background-color: white;
+	
+}
+
+.my_money_btn{
+	
+	width: 90%;
+    height: 40px;
+    font-size: 15px;
+    color: white;
+    font-family: "Microsoft YaHei";
+    background-color: #FF8200;
+    outline-offset: none;
+    border-radius: 2opx;
+    border-style: none;
+    border-radius: 20px;
+    margin: 5%;
+    font-weight: 100;
+	
+}
+
+.my_input{
+	
+	margin:3%;
+}

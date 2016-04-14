@@ -3,6 +3,9 @@
 
 WebContent/WEB-INF/lib
 bulid/
+WebContent/mall/resource/images/avatar/
+WebContent/mall/resource/images/news/
+WebContent/mall/resource/images/artwork/
 
 .gitingore
 .gitingore.swp

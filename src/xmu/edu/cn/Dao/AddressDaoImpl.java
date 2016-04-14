@@ -1,8 +1,13 @@
 package xmu.edu.cn.Dao;
 
-import org.hibernate.SessionFactory;
+import javax.annotation.Resource;
 
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+
+@Repository("addressDao")
 public class AddressDaoImpl implements AddressDao {
+	@Resource(name="sessionFactory")
 	SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {

@@ -6,16 +6,16 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">  
     
           
-        <bean id="userDao" class="xmu.edu.cn.Dao.UserDaoImpl"> 
-			<property name="sessionFactory" ref="sessionFactory"></property> 
+       <!--  <bean id="userDao" class="xmu.edu.cn.Dao.UserDaoImpl"> 
+        	<property name="sessionFactory" ref="sessionFactory"></property> 
 		</bean>
 		<bean id="addressDao" class="xmu.edu.cn.Dao.AddressDaoImpl"> 
 			<property name="sessionFactory" ref="sessionFactory"></property> 
 		</bean>
 		<bean id="artistDao" class="xmu.edu.cn.Dao.ArtistDaoImpl"> 
-			<property name="sessionFactory" ref="sessionFactory"></property> 
+			<property name="sessionFactory" ref="sessionFactory"></property>  
 		</bean>
-		
+		 -->
 		<!-- <bean id="personalService" class="xmu.edu.cn.Service.PersonalServiceImpl"></bean>
  -->
 		

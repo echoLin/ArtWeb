@@ -1,0 +1,26 @@
+.body{
+	ont-family: Helvetica,"Microsoft YaHei", Arial, Helvetica, sans-serif;
+}
+textarea#shop_desc{
+	height:100px;
+}
+select#select_type,select#select_customized{
+	width: 60%;
+    height: 30px;
+    font-size: 15px;
+    float: right;
+    color: #666;
+    border-radius: 5px;
+    font-family: Helvetica,"Microsoft YaHei", Arial, Helvetica, sans-serif;
+}
+.item_type{
+	height: 30px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 30px;
+}
+.shop_type{
+	display: inline;
+	width:40%;
+	color:#666;
+}
