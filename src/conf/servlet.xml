@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans.xsd
-	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-4.0.xsd
-	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"> -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -23,6 +13,10 @@
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	
+	<!-- 静态资源访问 -->
+	<mvc:resources location="/mall/resource/" mapping="/mall/resource/**" />
+	<mvc:resources location="/cms/resource/" mapping="/cms/resource/**" />
+	
 	<!-- 配置拦截 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -34,6 +28,20 @@
 			<!-- <mvc:mapping path="/test"/> -->
 			<bean class="xmu.edu.cn.Interceptor.LoginMallInterceptor"></bean>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/cms/**"/>
+			<mvc:exclude-mapping path="/cms/login"/>
+			<mvc:exclude-mapping path="/cms/doLogin"/>
+			<bean class="xmu.edu.cn.Interceptor.LoginCmsInterceptor"></bean>
+		</mvc:interceptor>
+		<!-- <mvc:interceptor>
+			<mvc:mapping path="/cms/**"/>
+			<mvc:exclude-mapping path="/cms"/>
+			<mvc:exclude-mapping path="/cms/index"/>
+			<mvc:exclude-mapping path="/cms/login"/>
+			<mvc:exclude-mapping path="/cms/doLogin"/>
+			<bean class="xmu.edu.cn.Interceptor.AuthCmsInterceptor"></bean>
+		</mvc:interceptor> -->
 	</mvc:interceptors>
 	
 	<!-- 最重要:::如果放在spring-context.xml中，这里的aop设置将不会生效 -->
@@ -55,10 +63,6 @@
 	
 	<!-- 开启注解 可以将请求参数绑定到控制器参数-->
 	<mvc:annotation-driven/>
-
-	<!-- 静态资源访问 -->
-	<mvc:resources location="/mall/resource/" mapping="/mall/resource/**" />
-	<mvc:resources location="/cms/resource/" mapping="/cms/resource/**" />
 	
 	<!-- 定义视图解析器 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

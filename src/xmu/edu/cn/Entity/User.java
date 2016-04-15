@@ -42,7 +42,6 @@ public class User {
 		if(user.username == null || user.telephone == null || user.password == null)
 			return false;
 		if(!Pattern.matches("^[a-zA-Z0-9]{4,17}$", user.username)){
-			System.out.println("username");
 			return false;
 		}
 		if(!Pattern.matches("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$", user.telephone))

@@ -1,7 +1,6 @@
 package xmu.edu.cn.Controller;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +59,7 @@ public class PersonalController {
 	
 	@RequestMapping("/doLogin")
 	public @ResponseBody JSON doLogin(String telephone, String password, HttpServletRequest request){
-		JSON json = personalService.getUser(telephone, password);
+		JSON json = personalService.login(telephone, password);
 		if(json.errno == 1){
 			request.getSession().setAttribute("user", json.data);
 		}

@@ -1,0 +1,50 @@
+body.main .modify{
+	color: #2c3e50;
+	background-color: none
+}
+body.main .modify .wrapper {
+	padding: 20px;
+	background-color: #ecf0f1;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	-ms-border-radius: 15px;
+	-o-border-radius: 15px;
+	border-radius: 15px;
+	-webkit-box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	margin: 10% auto;
+	width: 300px
+}
+
+body.main .modify .wrapper .brand {
+	margin-top: -15px
+}
+
+body.main .modify .wrapper .brand h1 {
+	display: block;
+	margin-bottom: 20px
+}
+
+body.main .modify .wrapper .brand h1 .logo-icon {
+	width: 75px;
+	height: 75px;
+	margin: auto;
+	padding: 15px;
+	border-radius: 40px;
+	background: #2c3e50
+}
+
+body.main .modify .wrapper .brand h1 .logo-icon i[class*='icon-'] {
+	margin-left: -5px;
+	color: #1abc9c;
+	font-size: 140%
+}
+
+body.main .modify .wrapper .text-center legend {
+	text-align: center
+}
+
+body.main .modify .wrapper .text-center legend input {
+	float: none
+}

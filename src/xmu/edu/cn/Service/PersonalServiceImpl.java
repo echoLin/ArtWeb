@@ -41,8 +41,9 @@ public class PersonalServiceImpl implements PersonalService {
 		return new JSON(user);
 	}
 	
+	@Transactional
 	@Override
-	public JSON getUser(String telephone, String password) {
+	public JSON login(String telephone, String password) {
 		if(telephone == null || password == null)
 			return new JSON(0, "用户名密码不能为空");
 		try {
