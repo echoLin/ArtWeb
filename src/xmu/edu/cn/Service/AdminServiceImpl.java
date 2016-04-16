@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import xmu.edu.cn.Dao.AdminDao;
-import xmu.edu.cn.Dao.AuthDao;
-import xmu.edu.cn.Dao.RoleDao;
 import xmu.edu.cn.Entity.Admin;
 import xmu.edu.cn.Entity.JSON;
 import xmu.edu.cn.Entity.Role;
@@ -15,10 +13,6 @@ import xmu.edu.cn.Entity.Role;
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminDao adminDao;
-	@Autowired
-	private AuthDao authDao;
-	@Autowired
-	private RoleDao roleDao;
 	
 	@Transactional
 	@Override

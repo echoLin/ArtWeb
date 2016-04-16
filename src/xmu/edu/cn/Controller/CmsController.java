@@ -25,6 +25,14 @@ public class CmsController {
 		return mv;
 	}
 	
+	@RequestMapping("/logout")
+	public ModelAndView toLogout(HttpServletRequest request){
+		request.getSession().setAttribute("admin", null);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("cms/login");
+		return mv;
+	}
+	
 	@RequestMapping({"/","/index"})
 	public ModelAndView toIndex(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();

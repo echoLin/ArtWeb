@@ -31,7 +31,6 @@ public class Admin implements Serializable{
 	private String password = "123456";
 	private String realname;
 	@ManyToMany
-	@MapKey(name="authId")
 	@JoinTable(
 			name="Auth",
 			joinColumns={@JoinColumn(name="adminId")},

@@ -70,7 +70,7 @@ pageEncoding="UTF-8"%>
             </li>
             <li class='divider'></li>
             <li>
-              <a href="/Art/cmsLogout">注销</a>
+              <a href="/Art/cms/logout">注销</a>
             </li>
           </ul>
         </li>
@@ -88,14 +88,12 @@ pageEncoding="UTF-8"%>
         		<i class='icon-dashboard'></i>
         		<a><button id='dashboard' type='button' data-model='dashboard' style='background-color:transparent;border:0;' onClick=loadContent(this)>首页</button></a>
         	</li>
-        	<li></li>
         	<c:if test="${not empty admin.roles }">
         	<c:forEach var="role" items="${ admin.roles}">
         	<li class='launcher'>
         		<i class="${role.description }"></i>
         		<a><button id="${role.englishName}" type='button' data-model="${role.englishName}" style='background-color:transparent;border:0;' onClick=loadContent(this)>${role.name}</button></a>
         	</li>
-        	<li></li>
         	</c:forEach>
         	</c:if>
         </ul>
@@ -234,14 +232,14 @@ if(validator_password(current_password,new_password,new_password_sed)){
 }
 
 function checkData(data){
-if(data.Errno == 2){
-	window.location.href = data.Data;
-}else if(data.Errno == 1){
-	alert(data.Data);
-	return false;
-}else{
-	return true;
-}
+	if(data.Errno == 2){
+		window.location.href = data.Data;
+	}else if(data.Errno == 1){
+		alert(data.Data);
+		return false;
+	}else{
+		return true;
+	}
 }
   </script>
 </html>
