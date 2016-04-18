@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public void saveUser(User user) throws Exception{
 		Session session = sessionFactory.getCurrentSession();
-		session.save(user);
+		session.saveOrUpdate(user);
 		user.setPassword(null);
 	}
 

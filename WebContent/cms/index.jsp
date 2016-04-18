@@ -14,6 +14,7 @@ pageEncoding="UTF-8"%>
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.css" rel="stylesheet" />
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
   	<script src="/Art/bootstrap/js/bootstrap.js" type="text/javascript" ></script>
+  	<script src="/Art/cms/resource/js/index.js" type="text/javascript" ></script>
   </head>
   <body class='main page'>
     <!-- top -->
@@ -70,7 +71,7 @@ pageEncoding="UTF-8"%>
             </li>
             <li class='divider'></li>
             <li>
-              <a href="/Art/cms/logout">注销</a>
+              <a href="/Art/cms/login">注销</a>
             </li>
           </ul>
         </li>
@@ -175,71 +176,4 @@ pageEncoding="UTF-8"%>
     <!-- modify password end -->
     
   </body>
-  <script>
-  function loadContent(e){
-		var url = "./jsp/"+e.id+".jsp";
-		$('#right').load(url);
-}
-
-function showModifyPasswordDiv(){
-document.getElementById("right").style.zindex="-1";
-document.getElementById("modify_password").style.display="";
-}
-
-function hideModifyPasswordDiv(){
-document.getElementById("right").style.zindex="1";
-document.getElementById("modify_password").style.display="none";
-}
-
-function validator_password(current_password,new_password,new_password_sed){
-if(current_password == null || current_password == ''){
-	alert("请输入现在的密码");
-	return false;
-}
-if(new_password == null || new_password == ''){
-	alert("请输入新的密码");
-	return false;
-}
-if(current_password == new_password){
-	alert("旧密码与新密码不能相同");
-	return false;
-}
-if(new_password != new_password_sed){
-	alert("两次输入的新密码不同");
-	return false;
-}
-return true;
-}
-
-function cmsModifyPassword(){
-var current_password = $('#current_password').val();
-var new_password = $('#new_password').val();
-var new_password_sed = $('#new_password_sed').val();
-if(validator_password(current_password,new_password,new_password_sed)){
-	$.post(
-			"/Art/cmsModifyPwd.json",
-			{
-				'current_password':current_password,
-				'new_password':new_password
-			},
-			function(data){
-				if(checkData(data)){
-					alert('修改密码成功');
-					hideModifyPasswordDiv();
-				}
-			});
-}
-}
-
-function checkData(data){
-	if(data.Errno == 2){
-		window.location.href = data.Data;
-	}else if(data.Errno == 1){
-		alert(data.Data);
-		return false;
-	}else{
-		return true;
-	}
-}
-  </script>
 </html>

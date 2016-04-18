@@ -34,6 +34,7 @@ public class LoginMallInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user") == null){
 			response.sendRedirect("/Art/mall/personal/login");
+			return false;
 		}
 		return true;
 	}

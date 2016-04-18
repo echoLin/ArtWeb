@@ -1,11 +1,15 @@
 package xmu.edu.cn.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import xmu.edu.cn.Dao.AdminDao;
+import xmu.edu.cn.Dao.ArtistDao;
 import xmu.edu.cn.Entity.Admin;
+import xmu.edu.cn.Entity.Artist;
 import xmu.edu.cn.Entity.JSON;
 import xmu.edu.cn.Entity.Role;
 
@@ -13,6 +17,8 @@ import xmu.edu.cn.Entity.Role;
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminDao adminDao;
+	@Autowired
+	private ArtistDao artistDao;
 	
 	@Transactional
 	@Override
@@ -39,5 +45,10 @@ public class AdminServiceImpl implements AdminService {
 				hasAuth = true;
 		}
 		return hasAuth;
+	}
+
+	@Override
+	public List<Artist> getArtistList(Integer status) {
+		return artistDao.getArtistList(status);
 	}
 }

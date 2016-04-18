@@ -185,12 +185,12 @@ p{
     white-space: nowrap;
 }
 .user_nav_list .u_money i {
-	color: #FF8200;
+	color: #4eabe8;
 	font-style: normal;
 }
 
 .user_nav_list .nt_icon {
-	background-image: url(/Art/mall/images/iconfont-jiantou.png);
+	background-image: url(/Art/mall/resource/images/iconfont-jiantou.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 15px;
@@ -519,7 +519,7 @@ p{
 	line-height: 24px;
 }
 .bank {
-	background-image: url(/Art/mall/images/iconfont-i.png);
+	background-image: url(/Art/mall/resource/images/iconfont-i.png);
 	background-repeat: no-repeat;
 	background-position: right center;
 	background-size: 25px;

@@ -34,8 +34,9 @@ public class Address {
 	private String postalCode;//邮政编码
 	private Integer isDelete;//是否被删除,1代表是被删除，0代表未被删除
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="userId", referencedColumnName="userId",updatable=false)
+	@JoinColumn(name="userId", referencedColumnName="userId",updatable=true)
 	private User user;//地址所对应的用户
+	private Integer isDefault;
 	public Long getAddressId() {
 		return addressId;
 	}
@@ -96,6 +97,11 @@ public class Address {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	public Integer getIsDefault() {
+		return isDefault;
+	}
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
 }
 

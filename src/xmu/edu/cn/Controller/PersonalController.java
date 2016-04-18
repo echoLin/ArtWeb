@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import xmu.edu.cn.Entity.Artist;
 import xmu.edu.cn.Entity.JSON;
 import xmu.edu.cn.Entity.User;
 import xmu.edu.cn.Service.PersonalService;
@@ -32,7 +33,6 @@ public class PersonalController {
 	
 	@RequestMapping("/login")
 	public ModelAndView toLogin(){
-		System.out.println("toLogin");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("mall/personal/login");
 		return mv;
@@ -74,6 +74,27 @@ public class PersonalController {
 		} catch (IOException e) {
 
 		}
+	}
+	
+	@RequestMapping("/apply")
+	public ModelAndView toApply(HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute("user");
+		ModelAndView mv = new ModelAndView();
+		if(user.getArtist() != null)
+			mv.addObject("artist", user.getArtist());
+		return mv;
+	}
+	
+	@RequestMapping("/doApply")
+	public @ResponseBody JSON doApply(Artist artist, HttpServletRequest request){
+		System.out.println("doApply");
+		User user = (User) request.getSession().getAttribute("user");
+		JSON json = personalService.addArtist(artist, user);
+		if(json.errno == 1){
+			request.getSession().setAttribute("user", json.data);
+			json.data = "申请提交成功";
+		}
+		return json;
 	}
 	
 }

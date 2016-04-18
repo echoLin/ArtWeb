@@ -108,14 +108,14 @@ function toAvatar(){
             <li>
             <c:choose>
             <c:when test="${user.artist==null }">
-              <a href="/Art/mall/jsp/artist/apply">
+              <a href="/Art/mall/personal/apply">
                     <div class="u_nav_name">申请艺术家</div>
                     <div class="nt_icon"></div>
               </a>
             </c:when>
             <c:otherwise>
             <c:if test="${user.artist.status==1 }">
-              <a href="/Art/mall/jsp/artist/artist">
+              <a href="/Art/mall/personal/artist">
                     <div class="u_nav_name">艺术家主页</div>
                     <div class="nt_icon"></div>
               </a> 
@@ -123,6 +123,11 @@ function toAvatar(){
               <c:if test="${user.artist.status==0 }">
               <a href="#">
                     <div class="u_nav_name">艺术家申请待审核</div>
+              </a> 
+              </c:if>
+              <c:if test="${user.artist.status==-1 }">
+              <a href="/Art/mall/personal/apply">
+                    <div class="u_nav_name">艺术家申请审核失败，重申</div>
                     <div class="nt_icon"></div>
               </a> 
               </c:if>

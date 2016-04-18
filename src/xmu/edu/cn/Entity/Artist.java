@@ -1,5 +1,6 @@
 package xmu.edu.cn.Entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="Artist.getArtistListByStatus", query="from Artist a where a.status=:status")
 	})
 public class Artist{
 	@Id
@@ -35,6 +37,11 @@ public class Artist{
 	private boolean favorite = false;
 	@Transient 
 	private Integer favoriteNum = 0;
+	
+	public static boolean checkArtist(Artist artist){
+		return true;
+	}
+	
 	public Long getArtistId() {
 		return artistId;
 	}
@@ -71,8 +78,9 @@ public class Artist{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public Date getApplyTime() {
-		return applyTime;
+	public String getApplyTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(applyTime);
 	}
 	public void setApplyTime(Date applyTime) {
 		this.applyTime = applyTime;

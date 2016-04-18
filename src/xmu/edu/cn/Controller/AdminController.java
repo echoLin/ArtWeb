@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.portlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndView;
 
 import xmu.edu.cn.Entity.Admin;
 import xmu.edu.cn.Entity.JSON;
@@ -14,19 +14,13 @@ import xmu.edu.cn.Service.AdminService;
 
 @Controller
 @RequestMapping("/cms")
-public class CmsController {
+public class AdminController {
+	
 	@Resource(name="adminService")
 	private AdminService adminService;
 	
 	@RequestMapping("/login")
-	public ModelAndView toLogin(){
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("cms/login");
-		return mv;
-	}
-	
-	@RequestMapping("/logout")
-	public ModelAndView toLogout(HttpServletRequest request){
+	public ModelAndView toLogin(HttpServletRequest request){
 		request.getSession().setAttribute("admin", null);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("cms/login");
@@ -50,16 +44,18 @@ public class CmsController {
 		return json;
 	}
 	
-	@RequestMapping({"/admin", "/admin/index"})
-	public ModelAndView toAdmin(HttpServletRequest request){
+	@RequestMapping("/artistAuditer")
+	public ModelAndView toAuditArtist(Integer status, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
-		if(adminService.hasAuth((Admin) request.getSession().getAttribute("admin"), request.getRequestURI())){
-			mv.setViewName("/cms/error");
-			mv.addObject("msg", "对不起，您没有权限访问");
+		if(!adminService.hasAuth((Admin) request.getSession().getAttribute("admin"), request.getRequestURI())){
+			mv.setViewName("cms/error");
+			mv.addObject("title", "艺术家审核");
+			mv.addObject("msg", "您没有权限访问");
 			return mv;
 		}
-		mv.setViewName("cms/admin/index");
+		mv.addObject("list", adminService.getArtistList(status));
+		mv.addObject("status", status);
+		mv.setViewName("cms/artistAuditer");
 		return mv;
 	}
-	
 }

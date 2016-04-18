@@ -120,7 +120,8 @@ a, div, header, span {
 /*header*/
 .header{
 	height:44px;
-	background:#ff8200;
+	/*background:#ff8200;*/
+	background:#4eabe8;
 	position: relative;
 	z-index: 10;
 }

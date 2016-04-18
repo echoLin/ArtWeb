@@ -1,6 +1,7 @@
 package xmu.edu.cn.Controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ public class TestController {
 	public ModelAndView viewAll(String name, String pwd){
 		ModelAndView mv = new ModelAndView();
 		System.out.println("name:" + name + " pwd:"+pwd);
-		mv.setViewName("test");
+		mv.setViewName("hello");
 		mv.addObject("hello","hellobaby");
 		return mv;
 	}
@@ -39,4 +40,12 @@ public class TestController {
 		 user.setUsername("test");
 		 return user;
 	 }
+	
+//	@RequestMapping({"/cms","/cms/index"})
+//	public ModelAndView toIndex(HttpServletRequest request){
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("admin",request.getAttribute("admin"));
+//		mv.setViewName("cms/index");
+//		return mv;
+//	}
 }

@@ -26,6 +26,7 @@ public class LoginCmsInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		if(session.getAttribute("admin") == null){
 			response.sendRedirect("/Art/cms/login");
+			return false;
 		}
 		return true;
 	}
